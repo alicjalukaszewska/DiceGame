@@ -1,0 +1,89 @@
+body {
+  font-family: sans-serif;
+  line-height: 1.5; }
+
+h1 {
+  color: #007FB2;
+  margin-bottom: 0; }
+
+h2 {
+  color: #007FB2; }
+
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto;
+  overflow: auto;
+  width: 80%;
+  padding: 20px;
+  border: 2px #0A9CD8 solid;
+  border-radius: 20px; }
+
+#startGameDiv #alert {
+  display: none;
+  color: red;
+  margin: 5px; }
+
+#startGameDiv label {
+  font-size: 18pt;
+  font-weight: bold;
+  text-transform: uppercase;
+  color: #007FB2; }
+
+#startGameDiv input {
+  font-size: 20pt;
+  background-color: #C6ECFF;
+  border: 1px #0A9CD8 solid;
+  text-align: center;
+  padding: 5px; }
+  #startGameDiv input:hover, #startGameDiv input:focus {
+    background-color: #EDFAFF; }
+
+#startGameDiv button {
+  width: 40%;
+  margin: 20px;
+  padding: 20px 30px;
+  background-color: #007FB2;
+  border: none;
+  color: #ffffff;
+  font-size: 18pt;
+  text-transform: uppercase;
+  letter-spacing: 1px; }
+  #startGameDiv button:hover, #startGameDiv button:focus {
+    background-color: #0A9CD8; }
+
+.header {
+  width: 100%;
+  display: flex;
+  justify-content: space-around; }
+
+.dice {
+  display: inline-flex;
+  align-items: center; }
+  .dice div {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100px;
+    height: 100px;
+    border: 2px #262626 solid;
+    border-radius: 4px;
+    margin: 10px;
+    text-align: center;
+    font-size: 36pt; }
+
+.chooseButtons button {
+  margin: 20px;
+  padding: 20px 30px;
+  background-color: #007FB2;
+  border: none;
+  color: #ffffff;
+  font-size: 14pt;
+  letter-spacing: 1px; }
+  .chooseButtons button:hover, .chooseButtons button:focus {
+    background-color: #0A9CD8; }
+
+#resultsDiv {
+  display: none; }
