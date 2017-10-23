@@ -2,7 +2,9 @@ var startGameDiv = document.querySelector('#startGameDiv');
 var gameDiv = document.querySelector('#gameDiv');
 var resultsDiv = document.querySelector('#resultsDiv');
 
-var playerOneName = document.querySelector("input");
+var playerOneNameInput = document.querySelector("input");
+var playerOneName = playerOneNameInput.value;
+
 var playerTwoName = "Komputer";
 var startGameBtn = document.querySelector("#startGameBtn");
 
@@ -29,8 +31,9 @@ var results = document.querySelector("#results");
 startGameBtn.addEventListener('click', startGame);
 
 function startGame (){
+	playerOneName = playerOneNameInput.value;
 	var alert = document.querySelector('#alert');
-	if (playerOneName.value === ""){
+	if (!playerOneName){
 		alert.style.display = 'block';
 	} else {
 		startGameDiv.style.display = "none";
@@ -41,36 +44,37 @@ function startGame (){
 
 function checkPoints (){
 	for (var i = 0; i < playerOne.length; i++){
-		playerOne[i].innerHTML = playerOneName.value + ": " + playerOnePoints + " pkt";
+		playerOne[i].innerHTML = playerOneName + ": " + playerOnePoints + " pkt";
 		playerTwo[i].innerHTML = playerTwoName + ": " + playerTwoPoints + " pkt";	
 	}
 }
 
 function firstRound (){
 	checkPoints();
-	drawFirstPlayer();
-	if (drawFirstPlayer === playerOneName.value){
+	var player = drawFirstPlayer();
+	if (player === 1){
 		activePlayer = 1;
-		activePlayerName.innerHTML = "Obstawia: " + playerOneName.value;
+		activePlayerName.innerHTML = "Obstawia: " + playerOneName;
 		gameTurn();
 	} else {
 		activePlayer = 2;
 		activePlayerName.innerHTML = "Obstawia: " + playerTwoName;
-		gameTurn();
+		gameComputerTurn();
 	}
 }
 
 function drawFirstPlayer (){
 	var player = Math.round(Math.random());
 	if (player === 0) {
-		player = playerOneName.value;
+		return 1;
 	} else {
-		player = playerTwoName;
+		return 0;
 	}
-	return player;
 }
 
 function firstDrawDice (){
+	lessBtn.disabled = false;
+	moreBtn.disabled = false;
 	var sumValue = document.querySelector('#gameDiv #sumValue');
 	var dice = document.querySelectorAll(".firstDice div");
 	var sum = 0;
@@ -85,6 +89,8 @@ function firstDrawDice (){
 }
 
 function secondDrawDice (){
+	lessBtn.disabled = true;
+	moreBtn.disabled = true;
 	var sumValue = document.querySelector('#resultsDiv #sumValue');
 	var dice = document.querySelectorAll(".secondDice div");
 	var sum = 0;
@@ -107,13 +113,30 @@ function gameTurn() {
  	rounds.innerHTML = "Runda: " + round;
 }
 
+function gameComputerTurn(){
+	firstDrawDice();
+	window.setTimeout(function (){
+		if (sumFirstDraw >= 8 ){
+			lessBtn.onclick = smallerValue();
+			lessBtn.className = "active";
+			lessBtn.click();
+		} else {
+			moreBtn.onclick = higherValue();
+			moreBtn.className = "active";
+			moreBtn.click();
+		}
+	}, 2000)
+	round++;
+ 	rounds.innerHTML = "Runda: " + round;
+}
+
 
 function smallerValue (){
 	secondDrawDice();
 	if (sumFirstDraw > sumSecondDraw){
 		if (activePlayer === 1){
 			playerOnePoints++;
-			results.innerHTML  = "Punkt zdobywa: " +  playerOneName.value;
+			results.innerHTML  = "Punkt zdobywa: " +  playerOneName;
 		} else {
 			playerTwoPoints++;
 			results.innerHTML = "Punkt zdobywa: " + playerTwoName;
@@ -124,11 +147,11 @@ function smallerValue (){
 			results.innerHTML = "Punkt zdobywa: " +  playerTwoName;
 		} else {
 			playerOnePoints++;
-			results.innerHTML = "Punkt zdobywa: " + playerOneName.value;
+			results.innerHTML = "Punkt zdobywa: " + playerOneName;
 		}
 	}
 	checkPoints();
-		if (round === maxround){
+	if (round === maxround){
 		stopGame();
 	} else{
 		nextRoundBtn.addEventListener('click', nextRound);
@@ -140,7 +163,7 @@ function higherValue (){
 	if (sumFirstDraw < sumSecondDraw){
 		if (activePlayer === 1){
 			playerOnePoints++;
-			results.innerHTML = "Punkt zdobywa: " +  playerOneName.value;
+			results.innerHTML = "Punkt zdobywa: " +  playerOneName;
 		}else {
 			playerTwoPoints++;
 			results.innerHTML = "Punkt zdobywa: " + playerTwoName;
@@ -152,7 +175,7 @@ function higherValue (){
 			results.innerHTML = "Punkt zdobywa: " +  playerTwoName;
 		} else {
 			playerOnePoints++;
-			results.innerHTML = "Punkt zdobywa: " + playerOneName.value;
+			results.innerHTML = "Punkt zdobywa: " + playerOneName;
 		}
 	}
 	checkPoints();
@@ -167,22 +190,27 @@ function nextRound() {
 	resultsDiv.style.display = "none";
 	if (activePlayer === 2){
 		activePlayer = 1;
-		activePlayerName.innerHTML = "Obstawia: " + playerOneName.value;
+		activePlayerName.innerHTML = "Obstawia: " + playerOneName;
+		gameTurn();
 
 	} else {
 		activePlayer = 2;
 		activePlayerName.innerHTML = "Obstawia: " + playerTwoName;
+		gameComputerTurn();
 	}
 	results.innerHTML = "";
-	gameTurn();
+	lessBtn.classList.remove("active");
+	moreBtn.classList.remove("active");
 }
 
+var endGameDiv = document.querySelector("#endGameDiv");
+var winner = document.querySelector("#winner");
+
 function stopGame(){
+	endGameDiv.style.display = "block";
 	if (playerOnePoints > playerTwoPoints) {
-		alert("Wygrał: " + playerOneName.value);
-	}else if (playerOnePoints === playerTwoPoints) {
-		alert("Remis");
-	}else{
-		alert("Wygrał: " + playerTwoName);
+		winner.innerHTML += playerOneName;
+	} else {
+		winner.innerHTML += playerTwoName;
 	}
 }

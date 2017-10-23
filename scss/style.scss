@@ -102,12 +102,55 @@ h2 {
 		color: $white;
 		font-size: 14pt;
 		letter-spacing: 1px;
+		&:hover {
+			background-color: $cerulean;
+		}
+
+		&:active, &:focus {
+			background-color: #3F6F82;
+		}
+
+		&.active {
+			background-color: #3F6F82;
+		}
+
+	}
+}
+
+#resultsDiv {
+	display: none;
+	text-align: center;
+
+	button {
+		width: 100%;
+		padding: 20px 30px;
+		background-color: $deepCerulean;
+		border: none;
+		color: $white;
+		font-size: 18pt;
+		text-transform: uppercase;
+		letter-spacing: 1px;
 		&:hover, &:focus {
 			background-color: $cerulean;
 		}
 	}
 }
 
-#resultsDiv {
+#endGameDiv {
 	display: none;
+
+	button {
+		width: 40%;
+		margin: 20px;
+		padding: 20px 30px;
+		background-color: $deepCerulean;
+		border: none;
+		color: $white;
+		font-size: 18pt;
+		text-transform: uppercase;
+		letter-spacing: 1px;
+		&:hover, &:focus {
+			background-color: $cerulean;
+		}
+	}
 }

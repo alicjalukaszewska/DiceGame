@@ -82,8 +82,39 @@ h2 {
   color: #ffffff;
   font-size: 14pt;
   letter-spacing: 1px; }
-  .chooseButtons button:hover, .chooseButtons button:focus {
+  .chooseButtons button:hover {
     background-color: #0A9CD8; }
+  .chooseButtons button:active, .chooseButtons button:focus {
+    background-color: #3F6F82; }
+  .chooseButtons button.active {
+    background-color: #3F6F82; }
 
 #resultsDiv {
+  display: none;
+  text-align: center; }
+  #resultsDiv button {
+    width: 100%;
+    padding: 20px 30px;
+    background-color: #007FB2;
+    border: none;
+    color: #ffffff;
+    font-size: 18pt;
+    text-transform: uppercase;
+    letter-spacing: 1px; }
+    #resultsDiv button:hover, #resultsDiv button:focus {
+      background-color: #0A9CD8; }
+
+#endGameDiv {
   display: none; }
+  #endGameDiv button {
+    width: 40%;
+    margin: 20px;
+    padding: 20px 30px;
+    background-color: #007FB2;
+    border: none;
+    color: #ffffff;
+    font-size: 18pt;
+    text-transform: uppercase;
+    letter-spacing: 1px; }
+    #endGameDiv button:hover, #endGameDiv button:focus {
+      background-color: #0A9CD8; }
