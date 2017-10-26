@@ -70,6 +70,9 @@ h2 {
 	}
 }
 
+#gameDiv {
+	display: none;
+
 .header {
 	width: 100%;
 	display: flex;
@@ -116,6 +119,8 @@ h2 {
 
 	}
 }
+}
+
 
 #resultsDiv {
 	display: none;
@@ -138,9 +143,13 @@ h2 {
 
 #endGameDiv {
 	display: none;
+	text-align: center;
+
+	#winner {
+		font-size: 16pt;
+	}
 
 	button {
-		width: 40%;
 		margin: 20px;
 		padding: 20px 30px;
 		background-color: $deepCerulean;
