@@ -37,8 +37,7 @@ let activePlayer = 0;
 
 function firstRound (){
 	checkPoints();
-	let player = drawFirstPlayer();
-	if (player === 1){
+	if (drawFirstPlayer() === 1){
 		activePlayer = 1;
 		activePlayerName.innerHTML = `Obstawia: ${playerOneName}`;
 		gameTurn();
@@ -180,7 +179,7 @@ function higherValue (){
 	checkPoints();
 	if (round === maxround){
 		stopGame();
-	} else{
+	} else {
 		nextRoundBtn.addEventListener('click', nextRound);
 	}
 }
@@ -218,7 +217,7 @@ function stopGame(){
 		winner.innerHTML += playerTwoName;
 	}
 	repeatGameBtn.addEventListener("click", function(){
-		winner.innerHTML = "";
+		winner.innerHTML = "Wygrał: ";
 		resultsDiv.style.display = "none";
 		results.innerHTML = "";
 		lessBtn.classList.remove("active");
