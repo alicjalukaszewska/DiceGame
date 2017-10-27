@@ -208,8 +208,8 @@ function stopGame(){
 		repeatGameBtn = document.querySelector("#repeatGameBtn");
 
 	endGameDiv.style.display = "block";
-	lessBtn.style.display = "none";
-	moreBtn.style.display = "none";
+	lessBtn.disabled = true;
+	moreBtn.disabled = true;
 	nextRoundBtn.style.display = "none";
 	if (playerOnePoints > playerTwoPoints) {
 		winner.innerHTML += playerOneName;
@@ -222,11 +222,10 @@ function stopGame(){
 		results.innerHTML = "";
 		lessBtn.classList.remove("active");
 		moreBtn.classList.remove("active");
-		lessBtn.style.display = "inline-block";
-		moreBtn.style.display = "inline-block";
+		lessBtn.disabled = false;
+		moreBtn.disabled = false;
 		nextRoundBtn.style.display = "block";
 		round = 0;
-		activePlayer = 0;
 		playerOnePoints = 0;
 		playerTwoPoints = 0;
 		startGame();
