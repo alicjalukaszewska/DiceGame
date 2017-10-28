@@ -37,11 +37,12 @@ let activePlayer = 0;
 
 function firstRound (){
 	checkPoints();
-	if (drawFirstPlayer() === 1){
+	let firstPlayer = drawFirstPlayer();
+	if (firstPlayer === 1){
 		activePlayer = 1;
 		activePlayerName.innerHTML = `Obstawia: ${playerOneName}`;
 		gameTurn();
-	} else {
+	} else{
 		activePlayer = 2;
 		activePlayerName.innerHTML = `Obstawia: ${playerTwoName}`;
 		gameComputerTurn();
@@ -53,7 +54,7 @@ function drawFirstPlayer (){
 	if (!player) {
 		return 1;
 	} else {
-		return 0;
+		return 2;
 	}
 }
 
@@ -100,6 +101,7 @@ function secondDrawDice (){
 let rounds = document.querySelector("#rounds");
 let round = 0;
 let maxround = 5;
+let timer = 0;
 
 function gameTurn() {
 	firstDrawDice();
@@ -111,7 +113,7 @@ function gameTurn() {
 
 function gameComputerTurn(){
 	firstDrawDice();
-	window.setTimeout(function (){
+	timer = window.setTimeout(function (){
 		if (sumFirstDraw >= 8 ){
 			lessBtn.onclick = smallerValue();
 			lessBtn.click();
@@ -133,24 +135,24 @@ function smallerValue (){
 	if (sumFirstDraw > sumSecondDraw){
 		if (activePlayer === 1){
 			playerOnePoints++;
-			results.innerHTML  = "Punkt zdobywa: " +  playerOneName;
+			results.innerHTML  = `Punkt zdobywa: ${playerOneName}`;
 		} else {
 			playerTwoPoints++;
-			results.innerHTML = "Punkt zdobywa: " + playerTwoName;
+			results.innerHTML = `Punkt zdobywa: ${playerTwoName}`;
 		}
 	} else {
 		if (activePlayer === 1){
 			playerTwoPoints++;
-			results.innerHTML = "Punkt zdobywa: " +  playerTwoName;
+			results.innerHTML = `Punkt zdobywa: ${playerTwoName}`;
 		} else {
 			playerOnePoints++;
-			results.innerHTML = "Punkt zdobywa: " + playerOneName;
+			results.innerHTML = `Punkt zdobywa: ${playerOneName}`;
 		}
 	}
 	checkPoints();
 	if (round === maxround){
 		stopGame();
-	} else{
+	} else {
 		nextRoundBtn.addEventListener('click', nextRound);
 	}
 }
@@ -161,19 +163,18 @@ function higherValue (){
 	if (sumFirstDraw < sumSecondDraw){
 		if (activePlayer === 1){
 			playerOnePoints++;
-			results.innerHTML = "Punkt zdobywa: " +  playerOneName;
-		}else {
+			results.innerHTML = `Punkt zdobywa: ${playerOneName}`;
+		} else {
 			playerTwoPoints++;
-			results.innerHTML = "Punkt zdobywa: " + playerTwoName;
+			results.innerHTML = `Punkt zdobywa: ${playerTwoName}`;
 		}
-		
 	} else {
 		if (activePlayer === 1){
 			playerTwoPoints++;
-			results.innerHTML = "Punkt zdobywa: " +  playerTwoName;
+			results.innerHTML = `Punkt zdobywa: ${playerTwoName}`;
 		} else {
 			playerOnePoints++;
-			results.innerHTML = "Punkt zdobywa: " + playerOneName;
+			results.innerHTML = `Punkt zdobywa: ${playerOneName}`;
 		}
 	}
 	checkPoints();
@@ -188,12 +189,12 @@ function nextRound() {
 	resultsDiv.style.display = "none";
 	if (activePlayer === 2){
 		activePlayer = 1;
-		activePlayerName.innerHTML = "Obstawia: " + playerOneName;
+		activePlayerName.innerHTML = `Obstawia: ${playerOneName}`;
 		gameTurn();
 
 	} else {
 		activePlayer = 2;
-		activePlayerName.innerHTML = "Obstawia: " + playerTwoName;
+		activePlayerName.innerHTML = `Obstawia: ${playerTwoName}`;
 		gameComputerTurn();
 	}
 	results.innerHTML = "";
@@ -222,6 +223,10 @@ function stopGame(){
 		results.innerHTML = "";
 		lessBtn.classList.remove("active");
 		moreBtn.classList.remove("active");
+        window.clearTimeout(timer);
+        timer = 0;
+		sumFirstDraw = 0;
+		sumSecondDraw = 0;
 		lessBtn.disabled = false;
 		moreBtn.disabled = false;
 		nextRoundBtn.style.display = "block";
