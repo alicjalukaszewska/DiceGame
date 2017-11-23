@@ -7,8 +7,8 @@ let startGameBtn = document.querySelector("#startGameBtn");
 startGameBtn.addEventListener('click', startGame);
 
 function startGame (){
-	endGameDiv.style.display = "none";
 	let alert = document.querySelector('#alert');
+	endGameDiv.style.display = "none";
 	playerOneName = playerOneNameInput.value;
 	if (!playerOneName){
 		alert.style.display = 'block';
@@ -25,11 +25,13 @@ let playerOnePoints = 0;
 let playerTwo = document.querySelectorAll('#playerTwo');
 let playerTwoPoints = 0;
 
-function checkPoints (){
-	for (let i = 0; i < playerOne.length; i++){
-		playerOne[i].innerHTML = `${playerOneName}: ${playerOnePoints} pkt`;
-		playerTwo[i].innerHTML = `${playerTwoName}: ${playerTwoPoints} pkt`;
-	}
+function checkPoints (){ 
+	playerOne.forEach(name1 => {
+		name1.innerHTML = `${playerOneName}: ${playerOnePoints} pkt`;
+	});
+	playerTwo.forEach(name2 => {
+		name2.innerHTML = `${playerTwoName}: ${playerTwoPoints} pkt`;
+	});
 }
 
 let activePlayerName = document.querySelector('#activePlayer');
@@ -62,18 +64,23 @@ let sumFirstDraw = 0;
 let lessBtn = document.querySelector('#lessBtn');
 let moreBtn = document.querySelector('#moreBtn');
 
+function draw (dice) {
+		let sum = 0,
+		dieValue = 0;
+		dice.forEach(die => {
+			dieValue = Math.floor(Math.random()*(6 - 1 + 1)) + 1;
+			die.innerHTML = dieValue;
+			sum += dieValue;
+		});
+		return sum;
+};
+
 function firstDrawDice (){
 	lessBtn.disabled = false;
 	moreBtn.disabled = false;
 	let sumValue = document.querySelector('#gameDiv #sumValue'),
-	 	dice = document.querySelectorAll(".firstDice div"),
-		sum = 0,
-		dieValue = 0;
-	for (let i = 0; i < dice.length; i++) {
-		dieValue = Math.floor(Math.random()*(6 - 1 + 1)) + 1;
-		dice[i].innerHTML = dieValue;
-		sum += dieValue;
-	}
+		dice = document.querySelectorAll(".firstDice div"),
+		sum = draw (dice);
  	sumValue.innerHTML = `Suma wartosci: ${sum}`;
  	sumFirstDraw = sum;
 }
@@ -86,16 +93,11 @@ function secondDrawDice (){
 	moreBtn.disabled = true;
 	let sumValue = document.querySelector('#resultsDiv #sumValue'),
 		dice = document.querySelectorAll(".secondDice div"),
-		sum = 0,
-		dieValue = 0;
-	for (let i = 0; i < dice.length; i++) {
-		dieValue = Math.floor(Math.random()*(6 - 1 + 1)) + 1;
-		dice[i].innerHTML = dieValue;
-		sum += dieValue;
-	}
+		sum = draw (dice);
  	sumValue.innerHTML = `Suma wartosci: ${sum}`;
  	resultsDiv.style.display = "block";
  	sumSecondDraw = sum;
+ 	console.log(sum);
 }
 
 let rounds = document.querySelector("#rounds");
