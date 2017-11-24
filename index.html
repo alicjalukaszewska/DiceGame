@@ -7,7 +7,7 @@
 </head>
 <body>
 	<div class="wrapper" id="startGameDiv">
-		<h1>Gra w kosci:</h1>
+		<h1>Gra w kosci</h1>
 		<div class="rules">
 			<ol><h2>Przebieg gry:</h2>
 				<li>Gra wylosuje rozpoczynającego gracza.</li>
@@ -30,34 +30,35 @@
 			<span id="rounds">Runda: 1</span>
 			<span id="playerTwo">Komputer: 0 pkt</span>
 		</div>
-
-		<p id="activePlayer">Obstawia: </p>
-		<p>Pierwszy rzut</p>
-		<div class="firstDice dice">
-			<div>1</div>
-			<div>2</div>
-			<div>3</div>
+		<div class="content">
+			<p id="activePlayer">Obstawia: </p>
+			<p>Pierwszy rzut</p>
+			<div class="firstDice dice">
+				<div>1</div>
+				<div>2</div>
+				<div>3</div>
+			</div>
+			<p id="sumValue">Suma wartosci: </p>
+			<div class="chooseButtons">
+				<button id="lessBtn">mniej</button>
+				<button id="moreBtn">więcej</button>
+			</div>
+			<div id="resultsDiv">
+				<p>Drugi rzut</p>
+				<div class="secondDice dice">
+					<div>1</div>
+					<div>2</div>
+					<div>3</div>
+				</div>
+				<p id="sumValue">Suma wartosci: </p>
+				<p id="results">Punkt zdobywa: </p>
+				<button id="nextRound">Następna runda</button>
+			</div>
+			<div id="endGameDiv">
+				<p id="winner">Wygrał: </p>
+				<button id="repeatGameBtn">Powtórz grę</button>
+			</div>
 		</div>
-		<p id="sumValue">Suma wartosci: </p>
-		<div class="chooseButtons">
-			<button id="lessBtn">mniej</button>
-			<button id="moreBtn">więcej</button>
-		</div>
-	<div id="resultsDiv">
-		<p>Drugi rzut</p>
-		<div class="secondDice dice">
-			<div>1</div>
-			<div>2</div>
-			<div>3</div>
-		</div>
-		<p id="sumValue">Suma wartosci: </p>
-		<p id="results">Punkt zdobywa: </p>
-		<button id="nextRound">Następna runda</button>
-	</div>
-	<div id="endGameDiv">
-		<p id="winner">Wygrał: </p>
-		<button id="repeatGameBtn">Powtórz grę</button>
-	</div>
 	</div>
 <script src="code.js"></script>
 </body>

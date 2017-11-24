@@ -1,108 +1,148 @@
+* {
+  padding: 0;
+  margin: 0; }
+
 body {
+  min-height: 200px;
+  background-image: url("../background.jpg");
+  background-attachment: fixed;
+  background-position: 50% 0;
+  background-repeat: no-repeat;
+  background-size: cover;
+  color: #DCDADB;
   font-family: sans-serif;
   line-height: 1.5; }
 
 h1 {
-  color: #007FB2;
+  color: #C8142C;
   margin-bottom: 0; }
 
 h2 {
-  color: #007FB2; }
+  color: #C8142C; }
 
 .wrapper {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
+  min-height: 100vh;
+  width: 80%;
   margin: 0 auto;
   overflow: auto;
-  width: 80%;
+  background: rgba(0, 0, 0, 0.7);
   padding: 20px;
-  border: 2px #0A9CD8 solid;
-  border-radius: 20px; }
+  border-radius: 20px;
+  box-sizing: border-box; }
+  @media only screen and (max-width: 1024px) {
+    .wrapper {
+      height: 100vh;
+      width: 100%;
+      border-radius: 0; } }
 
-#startGameDiv #alert {
-  display: none;
-  color: red;
-  margin: 5px; }
-
-#startGameDiv label {
-  font-size: 18pt;
-  font-weight: bold;
-  text-transform: uppercase;
-  color: #007FB2; }
-
-#startGameDiv input {
-  font-size: 20pt;
-  background-color: #C6ECFF;
-  border: 1px #0A9CD8 solid;
-  text-align: center;
-  padding: 5px; }
-  #startGameDiv input:hover, #startGameDiv input:focus {
-    background-color: #EDFAFF; }
-
-#startGameDiv button {
-  width: 40%;
-  margin: 20px;
-  padding: 20px 30px;
-  background-color: #007FB2;
-  border: none;
-  color: #ffffff;
-  font-size: 18pt;
-  text-transform: uppercase;
-  letter-spacing: 1px; }
-  #startGameDiv button:hover, #startGameDiv button:focus {
-    background-color: #0A9CD8; }
+#startGameDiv {
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 20px; }
+  #startGameDiv .rules {
+    padding: 10px; }
+  #startGameDiv #alert {
+    display: none;
+    color: red;
+    margin: 5px; }
+  #startGameDiv label {
+    font-size: 18pt;
+    font-weight: bold;
+    text-transform: uppercase;
+    color: #C8142C; }
+  #startGameDiv input {
+    width: 30%;
+    font-size: 20pt;
+    background-color: #C6ECFF;
+    border: 1px #8A0F20 solid;
+    text-align: center;
+    padding: 5px; }
+    #startGameDiv input:hover, #startGameDiv input:focus {
+      background-color: #EDFAFF; }
+    @media only screen and (max-width: 1024px) {
+      #startGameDiv input {
+        width: 100%; } }
+  #startGameDiv button {
+    width: 40%;
+    margin: 20px;
+    padding: 20px 30px;
+    background-color: #C8142C;
+    border: none;
+    color: #ffffff;
+    font-size: 18pt;
+    text-transform: uppercase;
+    letter-spacing: 1px; }
+    #startGameDiv button:hover, #startGameDiv button:focus {
+      background-color: #8A0F20; }
+    @media only screen and (max-width: 1024px) {
+      #startGameDiv button {
+        width: 100%; } }
 
 #gameDiv {
   display: none; }
   #gameDiv .header {
     width: 100%;
     display: flex;
-    justify-content: space-around; }
+    justify-content: space-around;
+    margin-right: auto;
+    margin-bottom: 20px; }
+  #gameDiv .content {
+    flex: 1 0 auto;
+    text-align: center;
+    align-self: stretch; }
+    #gameDiv .content #activePlayer, #gameDiv .content #results {
+      padding: 10px 20px; }
   #gameDiv .dice {
+    margin: 0 auto;
     display: inline-flex;
-    align-items: center; }
-    #gameDiv .dice div {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      width: 100px;
-      height: 100px;
-      border: 2px #262626 solid;
-      border-radius: 4px;
-      margin: 10px;
-      text-align: center;
-      font-size: 36pt; }
-  #gameDiv .chooseButtons button {
-    margin: 20px;
-    padding: 20px 30px;
-    background-color: #007FB2;
-    border: none;
-    color: #ffffff;
-    font-size: 14pt;
-    letter-spacing: 1px; }
-    #gameDiv .chooseButtons button:hover {
-      background-color: #0A9CD8; }
-    #gameDiv .chooseButtons button:active, #gameDiv .chooseButtons button:focus {
-      background-color: #3F6F82; }
-    #gameDiv .chooseButtons button.active {
-      background-color: #3F6F82; }
+    align-items: center;
+    font-size: 150px;
+    line-height: 0.9; }
+    @media only screen and (max-width: 1024px) {
+      #gameDiv .dice {
+        font-size: 7em; } }
+
+.chooseButtons button {
+  margin: 20px;
+  padding: 20px 30px;
+  background-color: #C8142C;
+  border: none;
+  color: #ffffff;
+  font-size: 14pt;
+  letter-spacing: 1px; }
+  .chooseButtons button:hover {
+    background-color: #8A0F20; }
+  .chooseButtons button:active, .chooseButtons button:focus {
+    background-color: #590813; }
+  .chooseButtons button.active {
+    background-color: #590813; }
+  @media only screen and (max-width: 1024px) {
+    .chooseButtons button {
+      margin: 5px; } }
 
 #resultsDiv {
   display: none;
-  text-align: center; }
+  margin-top: 20px; }
   #resultsDiv button {
-    width: 100%;
+    margin: 0 auto;
+    width: 50%;
     padding: 20px 30px;
-    background-color: #007FB2;
+    background-color: #C8142C;
     border: none;
     color: #ffffff;
     font-size: 18pt;
     text-transform: uppercase;
     letter-spacing: 1px; }
     #resultsDiv button:hover, #resultsDiv button:focus {
-      background-color: #0A9CD8; }
+      background-color: #8A0F20; }
+    @media only screen and (max-width: 1024px) {
+      #resultsDiv button {
+        width: 100%;
+        margin-top: 20px;
+        font-size: 14pt; } }
 
 #endGameDiv {
   display: none;
@@ -112,11 +152,11 @@ h2 {
   #endGameDiv button {
     margin: 20px;
     padding: 20px 30px;
-    background-color: #007FB2;
+    background-color: #C8142C;
     border: none;
     color: #ffffff;
     font-size: 18pt;
     text-transform: uppercase;
     letter-spacing: 1px; }
     #endGameDiv button:hover, #endGameDiv button:focus {
-      background-color: #0A9CD8; }
+      background-color: #8A0F20; }

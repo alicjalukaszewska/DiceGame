@@ -1,56 +1,87 @@
 @import "settings";
 
+*{
+	padding: 0;
+	margin: 0;
+}
+
 body {
+	min-height: 200px;
+	background: {
+		image: url('../background.jpg');
+	    attachment: fixed;
+	    position: 50% 0;
+	    repeat: no-repeat;
+	    size: cover;
+	}
+	color: #DCDADB;
 	font-family: sans-serif;
 	line-height: 1.5;
 }
 
 h1 {
-	color: $deepCerulean;
+	color: $crimson;
 	margin-bottom: 0;
 }
 
 h2 {
-	color: $deepCerulean;
+	color: $crimson;
 }
 
 .wrapper {
-	display: flex;
-	flex-direction: column;
-	align-items: center;
-	justify-content: center;
+	min-height: 100vh;
+	width: 80%;
 	margin: 0 auto;
 	overflow: auto;
-	width: 80%;
-	// height: 500px;
+	background: rgba(0, 0, 0, 0.7);
 	padding: 20px;
-	border: 2px $cerulean solid;
 	border-radius: 20px;
+	box-sizing: border-box;
+	@media #{$low1024}{
+		height: 100vh;
+		width: 100%;
+		border-radius: 0;
+	}
 }
 
 #startGameDiv{
+	margin: 0 auto;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	padding: 20px;
+
+	.rules {
+		padding: 10px;
+	}
+
 	#alert {
 		display: none;
 		color: red;
-		margin: 5px;;
+		margin: 5px;
 	}
 
 	label {
 		font-size: 18pt;
 		font-weight: bold;
 		text-transform: uppercase;
-		color: $deepCerulean;
+		color: $crimson;
 	}
 
 	input {
+		width: 30%;
 		font-size: 20pt;
 		background-color: #C6ECFF;
-		border: 1px $cerulean solid;
+		border: 1px $tamarillo solid;
 		text-align: center;
 		padding: 5px;
 
 		&:hover, &:focus {
 			background-color: #EDFAFF;
+		}
+		@media #{$low1024}{
+			width: 100%;
 		}
 	}
 
@@ -58,14 +89,18 @@ h2 {
 		width: 40%;
 		margin: 20px;
 		padding: 20px 30px;
-		background-color: $deepCerulean;
+		background-color: $crimson;
 		border: none;
 		color: $white;
 		font-size: 18pt;
 		text-transform: uppercase;
 		letter-spacing: 1px;
 		&:hover, &:focus {
-			background-color: $cerulean;
+			background-color: $tamarillo;
+		}
+
+		@media #{$low1024}{
+			width: 100%;
 		}
 	}
 }
@@ -73,26 +108,33 @@ h2 {
 #gameDiv {
 	display: none;
 
-.header {
-	width: 100%;
-	display: flex;
-	justify-content: space-around;
-}
-
-.dice {
-	display: inline-flex;
-	align-items: center;
-	div {
+	.header {
+		width: 100%;
 		display: flex;
-		align-items: center;
-		justify-content: center;
-		width: 100px;
-		height: 100px;
-		border: 2px #262626 solid;
-		border-radius: 4px;
-		margin: 10px;
+		justify-content: space-around;
+		margin-right: auto;
+		margin-bottom: 20px;
+	}
+
+	.content {
+		flex: 1 0 auto;
 		text-align: center;
-		font-size: 36pt;
+		align-self: stretch;
+
+		#activePlayer, #results {
+			padding: 10px 20px;
+		}
+	}
+
+	.dice {
+		margin: 0 auto;
+		display: inline-flex;
+		align-items: center;
+		font-size: 150px;
+		line-height: 0.9;
+		@media #{$low1024}{
+			font-size: 7em;
+		}
 	}
 }
 
@@ -100,43 +142,50 @@ h2 {
 	button {
 		margin: 20px;
 		padding: 20px 30px;
-		background-color: $deepCerulean;
+		background-color: $crimson;
 		border: none;
 		color: $white;
 		font-size: 14pt;
 		letter-spacing: 1px;
 		&:hover {
-			background-color: $cerulean;
+			background-color: $tamarillo;
 		}
 
 		&:active, &:focus {
-			background-color: #3F6F82;
+			background-color: $mahogany;
 		}
 
 		&.active {
-			background-color: #3F6F82;
+			background-color: $mahogany;
 		}
-
+		@media #{$low1024}{
+			margin: 5px;
+		}
 	}
-}
 }
 
 
 #resultsDiv {
 	display: none;
-	text-align: center;
+	margin-top: 20px;
 
 	button {
-		width: 100%;
+		margin: 0 auto;
+		width: 50%;
 		padding: 20px 30px;
-		background-color: $deepCerulean;
+		background-color: $crimson;
 		border: none;
 		color: $white;
 		font-size: 18pt;
 		text-transform: uppercase;
 		letter-spacing: 1px;
 		&:hover, &:focus {
-			background-color: $cerulean;
+			background-color: $tamarillo;
+		}
+		@media #{$low1024}{
+			width: 100%;
+			margin-top: 20px;
+			font-size: 14pt;
 		}
 	}
 }
@@ -152,14 +201,14 @@ h2 {
 	button {
 		margin: 20px;
 		padding: 20px 30px;
-		background-color: $deepCerulean;
+		background-color: $crimson;
 		border: none;
 		color: $white;
 		font-size: 18pt;
 		text-transform: uppercase;
 		letter-spacing: 1px;
 		&:hover, &:focus {
-			background-color: $cerulean;
+			background-color: $tamarillo;
 		}
 	}
 }

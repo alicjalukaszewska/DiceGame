@@ -14,7 +14,7 @@ function startGame (){
 		alert.style.display = 'block';
 	} else {
 		startGameDiv.style.display = "none";
-		gameDiv.style.display = "flex";
+		gameDiv.style.display = "block";
 		firstRound();
 	}
 }
@@ -67,9 +67,10 @@ let moreBtn = document.querySelector('#moreBtn');
 function draw (dice) {
 		let sum = 0,
 		dieValue = 0;
+		let dices = ['&#9856;', '&#9857;', '&#9858;', '&#9859;', '&#9860;', '&#9861;' ];
 		dice.forEach(die => {
-			dieValue = Math.floor(Math.random()*(6 - 1 + 1)) + 1;
-			die.innerHTML = dieValue;
+			dieValue = Math.floor(Math.random()*(6 - 1 + 1)+1);
+			die.innerHTML = dices[dieValue-1];
 			sum += dieValue;
 		});
 		return sum;
@@ -202,6 +203,7 @@ function nextRound() {
 	results.innerHTML = "";
 	lessBtn.classList.remove("active");
 	moreBtn.classList.remove("active");
+	document.activeElement.blur();
 }
 
 let endGameDiv = document.querySelector("#endGameDiv");
