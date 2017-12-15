@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<extension
+	type="module"
+	version="2.5"
+	client="site"
+	method="upgrade">
+
+<name>Wybrane kontakty</name>
+<author> Alicja </author>
+<creationDate> Maj 2016</creationDate>
+<copyright> Copyright </copyright>
+<authorEmail> cokolwiek@cokolwiek.pl</authorEmail>
+<authorUrl> www.costam.pl</authorUrl>
+<version>1.0</version>
+<description> Moduł wyświetla kontakty z wybranej kategorii</description>
+
+<files>
+	<filename module="mod_kontakty">mod_kontakty.php</filename>
+</files>	
+
+<config>
+
+	<fields name="params">
+	
+		<fieldset name="basic">
+		
+			<field
+			name="kategoria"
+			type="text"
+			label="Numer Kategorii"
+			desription="Wybierz numer kategorii z kontaktów" />
+		
+		</fieldset>
+	</fields>
+
+</config>
+
+</extension>
