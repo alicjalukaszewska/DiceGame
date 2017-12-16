@@ -74,12 +74,11 @@ function firstRound (){
 	if (drawFirstPlayer() === 1){
 		activePlayer = 1;
 		activePlayerName.textContent = `Obstawia: ${playerOneName}`;
-		gamePlayerTurn();
 	} else {
 		activePlayer = 2;
 		activePlayerName.textContent = `Obstawia: ${playerTwoName}`;
-		gameComputerTurn();
 	}
+	gameTurn();
 }
 
 function draw (dice) {
@@ -91,59 +90,53 @@ function draw (dice) {
 		//draw number from 1 to 6
 		dieValue = Math.floor(Math.random()*(6 - 1 + 1)+1);
 		//show die icon depended of dieValue
-		die.textContent = dices[dieValue-1];
+		die.innerHTML = dices[dieValue-1];
 		sum += dieValue;
 	});
 	return sum;
 };
 
-function firstDrawDice (){
-	lessBtn.disabled = false;
-	moreBtn.disabled = false;
-	const sumValue = document.querySelector('#gameDiv #sumValue'),
-		dice = document.querySelectorAll(".firstDice div"),
-		sum = draw (dice);
- 	sumValue.textContent = `Suma wartosci: ${sum}`;
- 	sumFirstDraw = sum;
+
+
+function drawDice(toggle, resultsSelector, diceNumber) { 
+	lessBtn.disabled = moreBtn.disabled = toggle; 
+	const sumValue = document.querySelector(`#${resultsSelector} #sumValue`); 
+	const dice = document.querySelectorAll(`.${ diceNumber === 1 ? 'first' : 'second' }Dice div` );
+	let result = 0;
+	const sum = draw( dice );
+	sumValue.textContent = `Suma wartości: ${ sum }`; 
+	if ( diceNumber === 2 ) { 
+		resultsDiv.style.display = 'block'; 
+		sumSecondDraw = sum;
+	} else {
+		sumFirstDraw = sum;
+	}
 }
 
-function secondDrawDice (){
-	lessBtn.disabled = true;
-	moreBtn.disabled = true;
-	const sumValue = document.querySelector('#resultsDiv #sumValue'),
-		dice = document.querySelectorAll(".secondDice div"),
-		sum = draw (dice);
- 	sumValue.textContent = `Suma wartosci: ${sum}`;
- 	resultsDiv.style.display = "block";
- 	sumSecondDraw = sum;
-}
-
-function gamePlayerTurn() {
-	firstDrawDice();
- 	lessBtn.addEventListener('click', smallerValue);
- 	moreBtn.addEventListener('click', higherValue);
- 	round++;
- 	rounds.textContent = `Runda: ${round}`;
-}
-
-function gameComputerTurn(){
-	firstDrawDice();
-	timer = window.setTimeout(function (){
-		if (sumFirstDraw >= 8 ){
-			lessBtn.onclick = smallerValue();
-			lessBtn.click();
-		} else {
-			moreBtn.onclick = higherValue();
-			moreBtn.click();
-		}
-	}, 800)
+function gameTurn () {
+	drawDice(false, 'gameDiv', 1);
+	if (activePlayer === 1){
+		lessBtn.addEventListener('click', smallerValue);
+ 		moreBtn.addEventListener('click', higherValue);
+	} else {
+		timer = window.setTimeout(function (){
+			if (sumFirstDraw >= 8 ){
+				lessBtn.onclick = smallerValue();
+				lessBtn.click();
+			} else {
+				moreBtn.onclick = higherValue();
+				moreBtn.click();
+			}
+		}, 800)
+	}
 	round++;
- 	rounds.textContent = `Runda: ${round}`;
+	rounds.textContent = `Runda: ${round}`;
 }
+
 
 //if player chosen smaller value
 function smallerValue (){
-	secondDrawDice();
+	drawDice(true, 'resultsDiv', 2);
 	lessBtn.className = "active";
 	if (sumFirstDraw > sumSecondDraw){
 		if (activePlayer === 1){
@@ -172,7 +165,7 @@ function smallerValue (){
 
 //if user chosen higher value
 function higherValue (){
-	secondDrawDice();
+	drawDice(true, 'resultsDiv', 2);
 	moreBtn.className = "active";
 	if (sumFirstDraw < sumSecondDraw){
 		if (activePlayer === 1){
@@ -201,17 +194,19 @@ function higherValue (){
 
 function nextRound() {
 	resultsDiv.style.display = "none";
+    window.clearTimeout(timer);
+    timer = 0;
 	//change activer player
 	if (activePlayer === 2){
 		activePlayer = 1;
 		activePlayerName.textContent = `Obstawia: ${playerOneName}`;
-		gamePlayerTurn();
-
+		gameTurn(activePlayer);
 	} else {
 		activePlayer = 2;
 		activePlayerName.textContent = `Obstawia: ${playerTwoName}`;
-		gameComputerTurn();
+		gameTurn(activePlayer);
 	}
+	
 	//reset results and buttons
 	results.textContent = "";
 	lessBtn.classList.remove("active");
@@ -246,6 +241,7 @@ function stopGame(){
 }
 
 function resetGame (winner) {
+	winner.textContent = "Wygrał: ";
 	//hide results
 	resultsDiv.style.display = "none";
 	results.textContent = "";
