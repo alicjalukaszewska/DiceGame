@@ -9,7 +9,8 @@
 	<div class="wrapper" id="startGameDiv">
 		<h1>Gra w kosci</h1>
 		<div class="rules">
-			<ol><h2>Przebieg gry:</h2>
+			<h2>Przebieg gry:</h2>
+			<ol>
 				<li>Gra wylosuje rozpoczynającego gracza.</li>
 				<li>Wylosowany gracz rzuca koścmi.</li>
 				<li>Przeciwnik obstawia, czy kolejny rzut będzie miał większą lub mniejszą wartość.</li>
@@ -21,7 +22,7 @@
 		<label for="name">Imię:</label>
 		<p id="alert">Podaj swoje imię!</p>
 		<input id="name" type="text">
-		<button id="startGameBtn">Rozpocznij grę</button>
+		<button type="submit" id="startGameBtn">Rozpocznij grę</button>
 	</div>
 
 	<div class="wrapper" id="gameDiv">
@@ -38,7 +39,7 @@
 				<div>2</div>
 				<div>3</div>
 			</div>
-			<p id="sumValue">Suma wartosci: </p>
+			<p class="sumValue">Suma wartosci: </p>
 			<div class="chooseButtons">
 				<button id="lessBtn">mniej</button>
 				<button id="moreBtn">więcej</button>
@@ -50,7 +51,7 @@
 					<div>2</div>
 					<div>3</div>
 				</div>
-				<p id="sumValue">Suma wartosci: </p>
+				<p class="sumValue">Suma wartosci: </p>
 				<p id="results">Punkt zdobywa: </p>
 				<button id="nextRound">Następna runda</button>
 			</div>

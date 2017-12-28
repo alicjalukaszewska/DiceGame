@@ -129,7 +129,7 @@ function draw (dice) {
 function rollOfDice(toggle, resultsSelector, diceNumber) { 
 	//toggle button clickable
 	lessBtn.disabled = moreBtn.disabled = toggle; 
-	const sumValue = document.querySelector(`#${resultsSelector} #sumValue`); 
+	const sumValue = document.querySelector(`#${resultsSelector} .sumValue`); 
 	const dice = document.querySelectorAll(`.${ diceNumber === 1 ? 'first' : 'second' }Dice div` );
 	let result = 0;
 	//roll dice and get their value
