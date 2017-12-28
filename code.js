@@ -1,3 +1,5 @@
+(function () {
+
 //variables to change view
 const startGameDiv = document.querySelector('#startGameDiv');
 const resultsDiv = document.querySelector('#resultsDiv');
@@ -67,7 +69,6 @@ function stopGame(){
 	const winner = document.querySelector("#winner"),
 		repeatGameBtn = document.querySelector("#repeatGameBtn"),
 		endGameDiv = document.querySelector("#endGameDiv");
-
 	//show endGame view
 	endGameDiv.style.display = "block";
 	//turn off buttons
@@ -106,7 +107,7 @@ function nextRound() {
 	results.textContent = "";
 	lessBtn.classList.remove("active");
 	moreBtn.classList.remove("active");
-	//remove focus from clicked button
+	//remove focus from last clicked button
 	document.activeElement.blur();
 }
 
@@ -123,14 +124,15 @@ function draw (dice) {
 		sum += dieValue;
 	});
 	return sum;
-};
-
+}
 
 function rollOfDice(toggle, resultsSelector, diceNumber) { 
+	//toggle button clickable
 	lessBtn.disabled = moreBtn.disabled = toggle; 
 	const sumValue = document.querySelector(`#${resultsSelector} #sumValue`); 
 	const dice = document.querySelectorAll(`.${ diceNumber === 1 ? 'first' : 'second' }Dice div` );
 	let result = 0;
+	//roll dice and get their value
 	const sum = draw( dice );
 	sumValue.textContent = `Suma wartości: ${ sum }`; 
 	if ( diceNumber === 2 ) { 
@@ -141,14 +143,17 @@ function rollOfDice(toggle, resultsSelector, diceNumber) {
 	}
 }
 
+//check which player get a point
 function addPoint (chosenBtn) {
 	const choice = chosenBtn.id;
 	let diceResult;
+	//check which button was chosen
 	if (choice === "lessBtn"){
 		diceResult = sumFirstDraw > sumSecondDraw;
 	} else {
 		diceResult = sumFirstDraw < sumSecondDraw;
 	}
+	//add point to player who won the turn
 	if (diceResult){
 		if (activePlayer === 1){
 			playerOnePoints++;
@@ -168,7 +173,7 @@ function addPoint (chosenBtn) {
 	}
 }
 
-//if user chosen next value
+//if user chosen value of second roll
 function guessValue (){
 	rollOfDice(true, 'resultsDiv', 2);
 	this.className = "active";
@@ -181,7 +186,7 @@ function guessValue (){
 	}
 }
 
-//player decide if next value is higher or lower than current
+//player decide if second roll value is higher or lower than current
 function gameTurn () {
 	rollOfDice(false, 'gameDiv', 1);
 	if (activePlayer === 1){
@@ -242,3 +247,5 @@ function startGame (){
 }
 
 startGameBtn.addEventListener('click', startGame);
+
+}());
