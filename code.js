@@ -6,15 +6,13 @@ const resultsDiv = document.querySelector('#resultsDiv');
 
 //playerOne variables
 const playerOneNameInput = document.querySelector("input");
-const playerOne = document.querySelectorAll('#playerOne');
+const playerOne = document.querySelector('#playerOne');
 let playerOnePoints = 0;
 
 //playerTwo variables
 const playerTwoName = "Komputer";
-const playerTwo = document.querySelectorAll('#playerTwo');
+const playerTwo = document.querySelector('#playerTwo');
 let playerTwoPoints = 0;
-//delay for 
-let timer = 0;
 
 //buttons
 const startGameBtn = document.querySelector("#startGameBtn");
@@ -26,11 +24,16 @@ const nextRoundBtn = document.querySelector('#nextRound');
 const activePlayerName = document.querySelector('#activePlayer');
 let activePlayer = 0;
 
+//default variables
 let sumFirstDraw = 0;
 let sumSecondDraw = 0;
 
+//delay AI's choice
+let timer = 0;
+
 const results = document.querySelector("#results");
 
+//rounds counter
 const rounds = document.querySelector("#rounds");
 let round = 0;
 let maxround = 5;
@@ -38,8 +41,8 @@ let maxround = 5;
 
 //display players points
 function checkPoints (){ 
-	playerOne.forEach(name1 => name1.textContent = `${playerOneName}: ${playerOnePoints} pkt`);
-	playerTwo.forEach(name2 => name2.textContent = `${playerTwoName}: ${playerTwoPoints} pkt`);
+	playerOne.textContent = `${playerOneName}: ${playerOnePoints} pkt`;
+	playerTwo.textContent = `${playerTwoName}: ${playerTwoPoints} pkt`;
 }
 
 function resetGame (winner) {
@@ -111,6 +114,7 @@ function nextRound() {
 	document.activeElement.blur();
 }
 
+//get random values of dice
 function draw (dice) {
 	let sum = 0,
 	dieValue = 0;
@@ -131,7 +135,6 @@ function rollOfDice(toggle, resultsSelector, diceNumber) {
 	lessBtn.disabled = moreBtn.disabled = toggle; 
 	const sumValue = document.querySelector(`#${resultsSelector} .sumValue`); 
 	const dice = document.querySelectorAll(`.${ diceNumber === 1 ? 'first' : 'second' }Dice div` );
-	let result = 0;
 	//roll dice and get their value
 	const sum = draw( dice );
 	sumValue.textContent = `Suma wartości: ${ sum }`; 
@@ -141,6 +144,10 @@ function rollOfDice(toggle, resultsSelector, diceNumber) {
 	} else {
 		sumFirstDraw = sum;
 	}
+}
+
+function showResults(winner) {
+	results.textContent  = `Punkt zdobywa: ${winner}`;
 }
 
 //check which player get a point
@@ -157,18 +164,18 @@ function addPoint (chosenBtn) {
 	if (diceResult){
 		if (activePlayer === 1){
 			playerOnePoints++;
-			results.textContent  = `Punkt zdobywa: ${playerOneName}`;
+			showResults(playerOneName);
 		} else {
 			playerTwoPoints++;
-			results.textContent = `Punkt zdobywa: ${playerTwoName}`;
+			showResults(playerTwoName);
 		}
 	} else {
 		if (activePlayer === 1){
 			playerTwoPoints++;
-			results.textContent = `Punkt zdobywa: ${playerTwoName}`;
+			showResults(playerTwoName);
 		} else {
 			playerOnePoints++;
-			results.textContent = `Punkt zdobywa: ${playerOneName}`;
+			showResults(playerOneName);
 		}
 	}
 }
@@ -189,16 +196,11 @@ function guessValue (){
 //player decide if second roll value is higher or lower than current
 function gameTurn () {
 	rollOfDice(false, 'gameDiv', 1);
-	if (activePlayer === 1){
-		lessBtn.addEventListener('click', guessValue);
- 		moreBtn.addEventListener('click', guessValue);
-	} else {
+	if (activePlayer === 2){
 		timer = window.setTimeout(function (){
 			if (sumFirstDraw >= 8 ){
-				lessBtn.addEventListener('click', guessValue);
 				lessBtn.click();
 			} else {
-				moreBtn.addEventListener('click', guessValue);
 				moreBtn.click();
 			}
 		}, 800)
@@ -211,7 +213,7 @@ function drawFirstPlayer (){
 	//draw beetween 1 and 0
 	const player = Math.round(Math.random());
 	//if 0 choose player one, if 1 choose player two
-	if (!player) {
+	if (player === 1) {
 		return 1;
 	} else {
 		return 2;
@@ -246,6 +248,9 @@ function startGame (){
 	}
 }
 
+
+lessBtn.addEventListener('click', guessValue);
+moreBtn.addEventListener('click', guessValue);
 startGameBtn.addEventListener('click', startGame);
 
 }());
