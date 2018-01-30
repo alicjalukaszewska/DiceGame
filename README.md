@@ -1,5 +1,7 @@
 # DiceGame
 
+**[LIVE PREVIEW](https://alicjalukaszewska.github.io/DiceGame/)** 
+
 Browser game that imitates commonly known dice game. Player decides if second roll of dice will be greater or lower than the first one. If he or she bets correctly, he or she gets a point, otherwise point goes to opponent. The game ends after five rounds.
 Application is in Polish.
 
@@ -29,6 +31,7 @@ When the fifth round ends, application show winner of the game and button to rep
 
 Clicking the repeat game button resets all values, including points of players and round count, and restarts all initial values. 
 
+---
 ### Potential future features:
 * Option to change language to English
 * Option to play with other player
